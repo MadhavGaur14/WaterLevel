@@ -1,0 +1,44 @@
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust the gap as needed */
+    justify-content: center; /* Center the images horizontally */
+  }
+
+  .image-container div {
+    flex: 1;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 16px; /* Add some space between rows */
+  }
+
+  /* Add styles for the code section */
+.code-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adjust the gap as per your preference */
+    padding: 20px; /* Adjust the padding as per your preference */
+  }
+  
+  /* Add rounded edges to code images */
+  .code-img {
+    border-radius: 10px; /* Adjust the border-radius as per your preference */
+    max-width: 100%;
+  }
+  
+  /* Center the code section */
+  .container.code-section {
+    text-align: center;
+  }
+  
+  /* Center the footer text */
+  footer {
+    text-align: center;
+  }
+  
+  
