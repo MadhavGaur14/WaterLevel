@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water level Monitoring System</title>
+  <!-- Include the Tailwind CSS CDN or link to your local file -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-500 p-4 fixed w-full z-10">
+    <div class="container mx-auto">
+      <div class="flex items-center justify-between">
+        <div class="text-white text-xl font-bold">Water Level Monitoring System</div>
+        <div class="flex space-x-4">
+          <a href="#table" class="text-white">Table of contents</a>
+          <a href="#about" class="text-white">About us</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="text-gray-600 body-font">
+    <div class="container flex flex-wrap px-5 py-24 mx-auto items-center">
+      <div class="md:w-1/2 md:pr-12 md:py-8 md:border-r md:border-b-0 mb-10 md:mb-0 pb-10 border-b border-gray-200">
+        <h1 class="sm:text-4xl text-4xl font-medium title-font mb-2 text-gray-900">Introduction</h1>
+        <div class="h-1 w-20 bg-blue-500 rounded"></div>
+        <br>
+        <p class="leading-relaxed text-2xl">The Water Level Monitoring System using Blynk and an ultrasonic sensor is designed to provide accurate and real-time data on water levels. It utilizes a combination of ultrasonic and pressure sensors, along with a microcontroller and communication modules, to ensure precise measurements and seamless integration with the Blynk IoT platform. This system is versatile, offering both local monitoring through display modules and remote monitoring via the Blynk app. Let's explore the key components that make this system functional.</p>
+      </div>
+      <div class="flex flex-col md:w-1/2 md:pl-12">
+        <h2 class="title-font font-semibold text-gray-800 tracking-wider text-4xl mb-3" id="table">Table of contents </h2>
+        <div class="h-1 w-20 bg-blue-500 rounded"></div>
+        <br>
+        <nav class="flex flex-wrap list-none -mb-1">
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#components">1. Components Used</a>
+            </li>
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#system">2. System Operation</a>
+            </li>
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#algo">3. Algorithm</a>
+            </li>
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#circuit">4. Circuit Diagram</a>
+            </li>
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#code">5. Code </a>
+            </li>
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#conc">6. Conclusion</a>
+            </li>
+            <li class="lg:w-1/3 mb-1 w-full">
+              <a class="text-gray-600 text-2xl hover:text-gray-800 block" href="#ref">7. References</a>
+            </li>
+          </nav>
+          
+          <br><br><br><br><br>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap w-full mb-20">
+        <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900" id="components">Components Used</h1>
+          <div class="h-1 w-20 bg-blue-500 rounded"></div>
+        </div>
+      </div>
+      <div class="flex flex-wrap -m-4">
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/ultrasonic_sensor_image.jpg" alt="content">
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Ultrasonic Sensor (HC-SR04) </h2>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/pressure_sensor_image.jpg" alt="content">
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Pressure Sensor (MPX5100)</h2>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/arduino_image.png" alt="content">
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Microcontroller (Arduino)</h2>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/display_communication_image.jpg" alt="content">
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">2.4 Display/Communication Module</h2>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+            <div class="bg-gray-100 p-6 rounded-lg">
+              <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/wifi_module_image.png" alt="content">
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Wi-Fi Module (ESP8266 or ESP32)</h2>
+            </div>
+          </div>
+          <div class="xl:w-1/4 md:w-1/2 p-4">
+            <div class="bg-gray-100 p-6 rounded-lg">
+              <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/jumper_wires_image.jpg" alt="content">
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Jumper Wires</h2>
+            </div>
+          </div>
+          <div class="xl:w-1/4 md:w-1/2 p-4">
+            <div class="bg-gray-100 p-6 rounded-lg">
+              <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/breadboard_image.jpg" alt="content">
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Breadboard</h2>
+            </div>
+          </div>
+          <div class="xl:w-1/4 md:w-1/2 p-4">
+            <div class="bg-gray-100 p-6 rounded-lg">
+              <img class="h-40 rounded w-full object-cover object-center mb-6" src="images/resistors_leds_image.png" alt="content">
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Resistors and LEDs (optional)</h2>
+            </div>        
+      </div>
+    </div>
+  </section>
+
+  <section class="text-gray-600 body-font overflow-hidden">
+    <h1 class="sm:text-3xl px-10 text-2xl font-medium title-font mb-2 text-gray-900" id="system">System Operation</h1>
+    <div class="h-1 ml-10 px-10 w-20 px-10 bg-blue-500 rounded"></div>
+    <div class="container px-5 py-10 mx-auto">
+      <div class="-my-8 divide-y-2 divide-gray-100">
+        <div class="py-8 flex flex-wrap md:flex-nowrap">
+
+          <div class="md:flex-grow">
+            <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">3.1 Ultrasonic Sensor Operation:</h2>
+            <p class="leading-relaxed">The ultrasonic sensor operates on the principle of emitting short ultrasonic pulses and measuring the time it takes for these pulses to echo back. By knowing the speed of sound in air, the microcontroller calculates the distance to the water surface. This non-contact method ensures accuracy and is unaffected by factors such as water temperature or conductivity.</p>
+          </div>
+        </div>
+        <div class="py-8 flex flex-wrap md:flex-nowrap">
+
+          <div class="md:flex-grow">
+            <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">3.2 Pressure Sensor Operation:</h2>
+            <p class="leading-relaxed">The pressure sensor plays a vital role in measuring the water pressure at a specific depth within the container. As water levels change, the pressure at the sensor location varies. The analog signal generated by the pressure sensor is then converted to a corresponding water level measurement, contributing to the overall accuracy of the system.</p>
+          </div>
+        </div>
+        <div class="py-8 flex flex-wrap md:flex-nowrap">
+            <div class="md:flex-grow">
+                <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">3.3 Data Fusion:</h2>
+                <p class="leading-relaxed">One of the system's strengths lies in its ability to fuse data from both sensors. This integration enhances the accuracy and reliability of water level measurements. Calibration factors are implemented to fine-tune the system, addressing any discrepancies between sensor readings and actual water levels.</p>
+              </div>
+            </div>
+            <div class="py-8 flex flex-wrap md:flex-nowrap">
+        
+
+          <div class="md:flex-grow">
+            <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">3.4 Display and Communication:</h2>
+            <p class="leading-relaxed">For local monitoring, the system incorporates a display module, such as an LCD screen, to present real-time water level data. This ensures on-site personnel have immediate access to critical information. Simultaneously, communication modules facilitate the transmission of data to external devices or remote servers, enabling broader applications and enhanced accessibility.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="text-gray-600 body-font overflow-hidden">
+    <h1 class="sm:text-3xl px-10  pt-10 text-2xl font-medium title-font mb-2 text-gray-900" id="algo">Algorithm</h1>
+    <div class="h-1 ml-10 px-10 w-20 px-10 bg-blue-500 rounded"></div>
+    <div class="container px-5 py-10 mx-auto">
+      <div class="-my-8 divide-y-2 divide-gray-100">
+        <div class="py-2 flex flex-wrap md:flex-nowrap">
+
+          <div class="md:flex-grow">
+            <p class="leading-relaxed">The Water Level Monitoring System algorithm revolves around the accurate measurement of water levels using an ultrasonic sensor and the seamless integration with the Blynk IoT platform. The following steps outline the core algorithm.</p>
+            <p>Set up the hardware components, including the Arduino board, ultrasonic sensor (HC-SR04), and Blynk connection.</p>
+            <p>Configure the Blynk app and obtain the authentication token.</p> 
+          </div>
+        </div>
+        <div class="py-8 flex flex-wrap md:flex-nowrap">
+
+          <div class="md:flex-grow">
+            <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">Blynk Connection:</h2>
+            <p class="leading-relaxed">Establish a connection to the Blynk server using the Wi-Fi credentials and authentication token.
+                Continuously run the Blynk service in the main loop.</p>
+          </div>
+        </div>
+        <div class="py-8 flex flex-wrap md:flex-nowrap">
+            <div class="md:flex-grow">
+                <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">Ultrasonic Sensor Measurement:</h2>
+                <p class="leading-relaxed">Use the NewPing library to interface with the ultrasonic sensor.
+                    Trigger the sensor to send ultrasonic waves and measure the time taken for the waves to return (echo).
+                    Convert the echo time to distance in centimeters using the speed of sound.</p>
+              </div>
+            </div>
+            <div class="py-8 flex flex-wrap md:flex-nowrap">
+                <div class="md:flex-grow">
+                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">Data Transmission to Blynk:</h2>
+                    <p class="leading-relaxed">Send the measured water level (distance) to the Blynk app using the Blynk.virtualWrite() function.
+                        Display the real-time water level on the Blynk app through a Value Display widget.</p>
+                  </div>
+                </div>
+                <div class="py-8 flex flex-wrap md:flex-nowrap">
+                    <div class="md:flex-grow">
+                        <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">Continuous Monitoring:</h2>
+                        <p class="leading-relaxed">Repeat the measurement and data transmission process at regular intervals to provide continuous monitoring.</p>
+                      </div>
+                    </div>
+                    <div class="py-8 flex flex-wrap md:flex-nowrap">
+          <div class="md:flex-grow">
+            <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">Components Used</h2>
+            <p class="leading-relaxed"><b>Arduino Board:</b> Acts as the central processing unit and interface for connecting sensors and Blynk.</p>
+            <p class="leading-relaxed"><b>Ultrasonic Sensor (HC-SR04): </b>Measures water levels by sending ultrasonic waves and calculating the time taken for the waves to return.</p>
+            <p class="leading-relaxed"><b>Blynk IoT Platform:</b> Provides a user-friendly interface for real-time monitoring and management of the water level data.</p>
+            <p class="leading-relaxed"><b>NewPing Library:</b> Facilitates easy interfacing with the ultrasonic sensor for accurate distance measurements.</p>
+            <p class="leading-relaxed"><b>Wi-Fi Module:</b> Enables wireless communication between the Arduino board and the Blynk server.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-gray-600 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900" id="circuit">Circuit Diagram</h1>
+        <p class="mb-8 leading-relaxed">The circuit diagram serves as the visual representation of the hardware components and their interconnections within the Water Level Monitoring System. This section details the configuration of the ultrasonic sensor, microcontroller (e.g., Arduino), and the integration with Blynk. A comprehensive circuit diagram facilitates a clear understanding of the project's hardware setup, aiding both developers and end-users in replicating and implementing the system effectively.</p>
+      </div>
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+        <img class="object-cover object-center rounded" alt="hero" src="images/circuit_diagram_image.jpg">
+      </div>
+    </div>
+  </section>
+  <h1 class="sm:text-3xl px-10  pt-10 text-2xl font-medium title-font mb-2 text-gray-900" id="code">Code</h1>
+    <div class="h-1 ml-10 px-10 w-20 px-10 bg-blue-500 rounded"></div>>
+  <div class="container code-section">
+    <img class="code-img" src="images/code1.png" alt="Code Image">
+    <img class="code-img" src="images/code2.png" alt="Code Image">
+    <img class="code-img" src="images/code3.png" alt="Code Image">
+    <img class="code-img" src="images/code4.png" alt="Code Image">
+
+</div>
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <h1 class="sm:text-3xl px-10  pt-10 text-2xl font-medium title-font mb-2 text-gray-900" id="conc">Conclusion</h1>
+    <div class="h-1 ml-10 px-10 w-20 px-10 bg-blue-500 rounded"></div>
+    <div class="container px-5 py-10 mx-auto">
+      <div class="-my-8 divide-y-2 divide-gray-100">
+        <div class="py-2 flex flex-wrap md:flex-nowrap">
+
+          <div class="md:flex-grow">
+            <p class="leading-relaxed">The Water Level Monitoring System presented in this report represents a significant advancement in water level monitoring technology. By combining the capabilities of ultrasonic and pressure sensors, the system offers a comprehensive and accurate solution for various applications, including water storage tanks, reservoirs, and industrial processes. The successful implementation and testing of the system underscore its potential impact on water resource management and industrial efficiency..</p> 
+          </div>
+        
+</section>
+<section class="text-gray-600 body-font overflow-hidden">
+    <h1 class="sm:text-3xl px-10  pt-10 text-2xl font-medium title-font mb-2 text-gray-900" id="ref">References</h1>
+    <div class="h-1 ml-10 px-10 w-20 px-10 bg-blue-500 rounded"></div>
+    <div class="container px-5 py-10 mx-auto">
+      <div class="-my-8 divide-y-2 divide-gray-100">
+        <div class="py-2 flex flex-wrap md:flex-nowrap">
+
+          <div class="md:flex-grow">
+            <p class="leading-relaxed">1. Tech StudyCell. (2022, December 20). 
+              IoT Based Water Level Monitoring system using ESP32 Blynk & Ultrasonic Sensor [Video]. YouTube. https://www.youtube.com/watch?v=9geREeE13</p>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/NHxnWQF2504?si=9ukKZJKxGlTDAimf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>jc
+        
+</section>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest" id="about">OUR TEAM</h1>
+    </div>
+    <div class="flex flex-wrap -m-4">
+      <div class="p-4 lg:w-1/2">
+        <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+          <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="images/madhav.jpg">
+          <div class="flex-grow sm:pl-8">
+            <h2 class="title-font font-medium text-lg text-gray-900">Madhav Gaur</h2>
+            <h3 class="text-gray-500 mb-3">DevOps Enthusiast</h3>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 lg:w-1/2">
+        <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+          <img alt="team" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="images/mansi.jpg">
+          <div class="flex-grow sm:pl-8">
+            <h2 class="title-font font-medium text-lg text-gray-900">Mansi Dwivedi</h2>
+            <h3 class="text-gray-500 mb-3">Web Designer</h3>
+
+            </span>
+          </div>
+        </div>
+      </div>
+      
+</section>
+  <!-- Footer -->
+  <footer class="bg-white text-black p-4">
+    <div class="container mx-auto text-center">
+      <p>&copy; Department of Information Science and Engineering NMAM Institute of Technology</p>
+    </div>
+  </footer>
+
+  <!-- Include the Tailwind CSS and JavaScript files -->
+  <!-- You can get these files from the Tailwind CSS website or use the CDN -->
+  <!-- Example CDN links (make sure to use the correct version): -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+  
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>
